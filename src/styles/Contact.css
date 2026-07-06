@@ -1,0 +1,114 @@
+.contact { padding: 7rem 0; background: var(--dark-3); }
+.contact-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 5rem;
+}
+.contact-info h3 {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.contact-info > p { color: var(--gray); line-height: 1.8; margin-bottom: 2.5rem; }
+.contact-details { display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 2.5rem; }
+.contact-item { display: flex; gap: 1rem; align-items: flex-start; }
+.contact-icon {
+  width: 45px; height: 45px;
+  background: rgba(201, 168, 76, 0.1);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold); font-size: 0.95rem; flex-shrink: 0;
+}
+.contact-item h4 {
+  font-size: 0.8rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--gray); margin-bottom: 0.3rem;
+}
+.contact-item a, .contact-item p { font-size: 1rem; color: var(--white); transition: var(--transition); }
+.contact-item a:hover { color: var(--gold); }
+.social-links { display: flex; gap: 1rem; margin-bottom: 2rem; }
+.social-link {
+  width: 45px; height: 45px;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.95rem; color: var(--gold); transition: var(--transition);
+}
+.social-link:hover { background: var(--gold); color: var(--dark); border-color: var(--gold); }
+.whatsapp-btn {
+  display: inline-flex; align-items: center; gap: 0.8rem;
+  padding: 0.9rem 2rem; background: #25D366; color: var(--white);
+  border-radius: 2px; font-size: 0.85rem; font-weight: 600;
+  letter-spacing: 0.05em; transition: var(--transition);
+}
+.whatsapp-btn:hover {
+  background: #20BA5A;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+}
+.whatsapp-btn i { font-size: 1.2rem; }
+
+/* Form */
+.contact-form-wrapper {
+  background: var(--dark-2);
+  padding: 2.5rem;
+  border: 1px solid rgba(201, 168, 76, 0.1);
+}
+.contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.form-group { position: relative; }
+.form-group.full-width { grid-column: 1 / -1; }
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%; padding: 1rem;
+  background: var(--dark-3);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--white); font-family: var(--font-sans);
+  font-size: 0.9rem; transition: var(--transition); outline: none;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--gold); background: var(--dark-4);
+}
+.form-group label {
+  position: absolute; left: 1rem; top: 50%;
+  transform: translateY(-50%); font-size: 0.85rem;
+  color: var(--gray); pointer-events: none; transition: var(--transition);
+}
+.form-group select + label { display: none; }
+.form-group textarea + label { top: 1rem; transform: none; }
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label,
+.form-group textarea:focus + label,
+.form-group textarea:not(:placeholder-shown) + label {
+  top: -0.5rem; left: 0.8rem; font-size: 0.7rem;
+  color: var(--gold); background: var(--dark-2); padding: 0 0.4rem;
+}
+.field-error {
+  display: block;
+  color: #ff4d4d;
+  font-size: 0.75rem;
+  margin-top: 0.3rem;
+  padding-left: 0.2rem;
+}
+.form-group input.error,
+.form-group textarea.error {
+  border-color: #ff4d4d;
+}
+.form-submit-error {
+  text-align: center; padding: 1rem;
+  background: rgba(255, 77, 77, 0.15);
+  color: #ff4d4d; border-radius: 2px; font-size: 0.9rem;
+}
+.form-submit-error i { margin-right: 0.5rem; }
+.form-success {
+  text-align: center; padding: 1rem;
+  background: rgba(46, 213, 115, 0.15);
+  color: #2ed573; border-radius: 2px; font-size: 0.9rem;
+}
+.form-success i { margin-right: 0.5rem; }
+.btn:disabled { opacity: 0.7; cursor: not-allowed; }
+
+@media (max-width: 1024px) { .contact-wrapper { grid-template-columns: 1fr; gap: 3rem; } }
+@media (max-width: 768px) { .form-row { grid-template-columns: 1fr; } }
