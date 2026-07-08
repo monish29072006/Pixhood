@@ -10,9 +10,7 @@ const Hero = () => {
   return (
     <section className="hero" id="home">
       <div className="hero-video">
-        <video autoPlay muted loop playsInline>
-          <source src="/hero-video.mp4" type="video/mp4" />
-        </video>
+        <img src="/hero-bg.jpg" alt="Pixhood Hero Background" className="hero-bg-img" />
         <div className="video-overlay"></div>
       </div>
       <div className="hero-content">
