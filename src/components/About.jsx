@@ -50,9 +50,13 @@ const About = () => {
             <div className="image-wrapper">
               <img
                 src="/about-photo.jpg"
-                alt="Pixhood Team"
+                alt="Monish M - Administrator, Pixhood"
                 loading="lazy"
               />
+              <div className="image-caption">
+                <h4>Monish M</h4>
+                <span>Administrator</span>
+              </div>
             </div>
           </div>
         </div>
