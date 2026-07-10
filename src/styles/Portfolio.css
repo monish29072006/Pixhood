@@ -71,3 +71,97 @@
 @media (max-width: 1024px) { .portfolio-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 768px) { .portfolio-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 480px) { .portfolio-grid { grid-template-columns: 1fr; } }
+
+/* View icon on hover */
+.view-icon {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--gold);
+  font-size: 1rem;
+}
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.lightbox-content {
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.lightbox-content img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border: 1px solid rgba(201,168,76,0.2);
+}
+.lightbox-caption {
+  text-align: center;
+  margin-top: 1rem;
+}
+.lightbox-caption h3 {
+  font-family: var(--font-serif);
+  color: var(--white);
+  font-size: 1.2rem;
+  margin-bottom: 0.2rem;
+}
+.lightbox-caption p {
+  color: var(--gold);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.lightbox-close {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: #fff;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 10000;
+  transition: background 0.3s;
+}
+.lightbox-close:hover { background: var(--gold); color: #000; }
+.lightbox-prev,
+.lightbox-next {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: #fff;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  cursor: pointer;
+  z-index: 10000;
+  transition: background 0.3s;
+}
+.lightbox-prev { left: 1.5rem; }
+.lightbox-next { right: 1.5rem; }
+.lightbox-prev:hover,
+.lightbox-next:hover { background: var(--gold); color: #000; }
+.lightbox-counter {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,0.6);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+}

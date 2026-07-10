@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
 import '../styles/Portfolio.css'
 
@@ -16,6 +16,38 @@ const portfolioItems = [
 
 const Portfolio = () => {
   const ref = useScrollAnimation()
+  const [lightbox, setLightbox] = useState(null)
+
+  const openLightbox = (idx) => {
+    setLightbox(idx)
+    document.body.style.overflow = 'hidden'
+  }
+
+  const closeLightbox = () => {
+    setLightbox(null)
+    document.body.style.overflow = ''
+  }
+
+  const prev = (e) => {
+    e.stopPropagation()
+    setLightbox((lightbox - 1 + portfolioItems.length) % portfolioItems.length)
+  }
+
+  const next = (e) => {
+    e.stopPropagation()
+    setLightbox((lightbox + 1) % portfolioItems.length)
+  }
+
+  // Close on Escape key
+  React.useEffect(() => {
+    const handleKey = (e) => {
+      if (e.key === 'Escape') closeLightbox()
+      if (e.key === 'ArrowLeft' && lightbox !== null) setLightbox((lightbox - 1 + portfolioItems.length) % portfolioItems.length)
+      if (e.key === 'ArrowRight' && lightbox !== null) setLightbox((lightbox + 1) % portfolioItems.length)
+    }
+    window.addEventListener('keydown', handleKey)
+    return () => window.removeEventListener('keydown', handleKey)
+  }, [lightbox])
 
   return (
     <section className="portfolio" id="portfolio" ref={ref}>
@@ -27,18 +59,49 @@ const Portfolio = () => {
         </div>
         <div className="portfolio-grid">
           {portfolioItems.map(({ img, title, subtitle }, idx) => (
-            <div className="portfolio-item aos-elem" key={idx} style={{ transitionDelay: `${(idx % 8) * 0.06}s` }}>
+            <div
+              className="portfolio-item aos-elem"
+              key={idx}
+              style={{ transitionDelay: `${(idx % 8) * 0.06}s` }}
+              onClick={() => openLightbox(idx)}
+            >
               <img src={img} alt={title} loading="lazy" />
               <div className="portfolio-overlay">
                 <div className="portfolio-info">
                   <h3>{title}</h3>
                   <p>{subtitle}</p>
+                  <span className="view-icon"><i className="fas fa-expand"></i></span>
                 </div>
               </div>
             </div>
           ))}
         </div>
       </div>
+
+      {/* Lightbox */}
+      {lightbox !== null && (
+        <div className="lightbox" onClick={closeLightbox}>
+          <button className="lightbox-close" onClick={closeLightbox}>
+            <i className="fas fa-times"></i>
+          </button>
+          <button className="lightbox-prev" onClick={prev}>
+            <i className="fas fa-chevron-left"></i>
+          </button>
+          <div className="lightbox-content" onClick={e => e.stopPropagation()}>
+            <img src={portfolioItems[lightbox].img} alt={portfolioItems[lightbox].title} />
+            <div className="lightbox-caption">
+              <h3>{portfolioItems[lightbox].title}</h3>
+              <p>{portfolioItems[lightbox].subtitle}</p>
+            </div>
+          </div>
+          <button className="lightbox-next" onClick={next}>
+            <i className="fas fa-chevron-right"></i>
+          </button>
+          <div className="lightbox-counter">
+            {lightbox + 1} / {portfolioItems.length}
+          </div>
+        </div>
+      )}
     </section>
   )
 }
