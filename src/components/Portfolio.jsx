@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
 import '../styles/Portfolio.css'
 
@@ -30,20 +31,20 @@ const Portfolio = () => {
 
   const prev = (e) => {
     e.stopPropagation()
-    setLightbox((lightbox - 1 + portfolioItems.length) % portfolioItems.length)
+    setLightbox((prev) => (prev - 1 + portfolioItems.length) % portfolioItems.length)
   }
 
   const next = (e) => {
     e.stopPropagation()
-    setLightbox((lightbox + 1) % portfolioItems.length)
+    setLightbox((prev) => (prev + 1) % portfolioItems.length)
   }
 
-  // Close on Escape key
-  React.useEffect(() => {
+  useEffect(() => {
     const handleKey = (e) => {
+      if (lightbox === null) return
       if (e.key === 'Escape') closeLightbox()
-      if (e.key === 'ArrowLeft' && lightbox !== null) setLightbox((lightbox - 1 + portfolioItems.length) % portfolioItems.length)
-      if (e.key === 'ArrowRight' && lightbox !== null) setLightbox((lightbox + 1) % portfolioItems.length)
+      if (e.key === 'ArrowLeft') setLightbox((prev) => (prev - 1 + portfolioItems.length) % portfolioItems.length)
+      if (e.key === 'ArrowRight') setLightbox((prev) => (prev + 1) % portfolioItems.length)
     }
     window.addEventListener('keydown', handleKey)
     return () => window.removeEventListener('keydown', handleKey)
@@ -78,8 +79,8 @@ const Portfolio = () => {
         </div>
       </div>
 
-      {/* Lightbox */}
-      {lightbox !== null && (
+      {/* Lightbox rendered via Portal at body level */}
+      {lightbox !== null && createPortal(
         <div className="lightbox" onClick={closeLightbox}>
           <button className="lightbox-close" onClick={closeLightbox}>
             <i className="fas fa-times"></i>
@@ -100,7 +101,8 @@ const Portfolio = () => {
           <div className="lightbox-counter">
             {lightbox + 1} / {portfolioItems.length}
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </section>
   )
