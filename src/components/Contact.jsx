@@ -109,12 +109,10 @@ const Contact = () => {
             </div>
             <div className="social-links">
               {[
-                { icon: 'fa-instagram', label: 'Instagram' },
-                { icon: 'fa-facebook-f', label: 'Facebook' },
-                { icon: 'fa-youtube', label: 'YouTube' },
-                { icon: 'fa-linkedin-in', label: 'LinkedIn' },
-              ].map(({ icon, label }) => (
-                <a href="#" className="social-link" aria-label={label} key={label}>
+                { icon: 'fa-instagram', label: 'Instagram', href: 'https://www.instagram.com/pixhood_?igsh=MTR5NXg1OWk1bDQ3bg==' },
+                { icon: 'fa-linkedin-in', label: 'LinkedIn', href: '#' },
+              ].map(({ icon, label, href }) => (
+                <a href={href} className="social-link" aria-label={label} key={label} target="_blank" rel="noopener noreferrer">
                   <i className={`fab ${icon}`}></i>
                 </a>
               ))}
