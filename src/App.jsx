@@ -25,7 +25,6 @@ function App() {
         <About />
         <Services />
         <Portfolio />
-        <VideoShowcase />
         <WhyChoose />
         <Stats />
         <Testimonials />
